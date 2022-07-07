@@ -1,0 +1,6 @@
+.env
+.idea
+accounts/migrations
+mainsite/migrations
+media
+db.sqlite3
