@@ -4,11 +4,11 @@ from accounts.models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ["username", "email", "date_joined"]
+    list_display = ["email", "date_joined"]
     readonly_fields = ("date_joined", "last_login", )
     fieldsets = (
         (None, {
-            "fields": ("username", "password", "first_name", "last_name", "email")
+            "fields": ("email", "password", "first_name", "last_name")
         }),
         ("GENEL BİLGİLER", {
             "fields": ("is_active", "is_employee", "is_customer", "is_staff", "is_superuser", "groups", "user_permissions", "date_joined", "last_login")
