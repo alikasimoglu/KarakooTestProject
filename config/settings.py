@@ -29,6 +29,9 @@ except KeyError as e:
 
 ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS', default=[]))
 
+# Define SITE_ID:
+SITE_ID = 1
+
 ROOT_URLCONF = 'config.urls'
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -46,9 +49,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'accounts.apps.AccountsConfig',
     'mainsite.apps.MainsiteConfig',
     # third party
+    'crispy_forms',
+    'django_cleanup.apps.CleanupConfig',
+    'imagekit',
 ]
 
 # ==============================================================================
@@ -129,12 +136,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # Extended User Model Settings
 AUTH_USER_MODEL = 'accounts.User'
 
+# Login Redirection Settings
+LOGIN_URL = '/accounts/login'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/'
+
 # ==============================================================================
 # LOCALIZATION SETTINGS
 # ==============================================================================
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 USE_I18N = True
 USE_TZ = True
 
@@ -163,28 +175,27 @@ IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic
 # THIRD-PARTY APPLICATION SETTINGS
 # ==============================================================================
 
-# CKEDITOR SETTINGS
-CKEDITOR_UPLOAD_PATH = os.path.join("img/uploads/")
-AWS_QUERYSTRING_AUTH = False
-CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_BROWSE_SHOW_DIRS = True
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Advanced',
-        'width': '100%',
-        'tabSpaces': 4,
-        'extraPlugins': ','.join(
-            [
-               'codesnippet',
-            ]
-        ),
-    },
-}
-
 # CRISPY SETTINGS
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# ==============================================================================
+# EMAIL SETTINGS
+# ==============================================================================
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_PORT = 587  # in production mode
+EMAIL_PORT = 465
+# EMAIL_USE_TLS = True  # in production mode
+EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False  # in production mode
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Should use gmail app password for stability reasons.
+EMAIL_ADMIN = env('EMAIL_ADMIN')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 # ==============================================================================
 # SERVER SECURITY SETTINGS IN PRODUCTION MODE

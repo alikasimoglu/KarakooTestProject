@@ -1,16 +1,16 @@
 from django.contrib import admin
-from accounts.models import User
+from accounts.models import User, Employee
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ["email", "date_joined"]
+    list_display = ["email", "date_joined", "is_employee", "is_customer"]
     readonly_fields = ("date_joined", "last_login", )
     fieldsets = (
-        (None, {
-            "fields": ("email", "password", "first_name", "last_name")
+        ("LOGIN INFORMATIONS", {
+            "fields": ("email", "password")
         }),
-        ("GENEL BİLGİLER", {
+        ("STATUS AND PERMISSIONS", {
             "fields": ("is_active", "is_employee", "is_customer", "is_staff", "is_superuser", "groups", "user_permissions", "date_joined", "last_login")
         })
     )
@@ -20,3 +20,6 @@ class UserAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return True
+
+
+admin.site.register(Employee)
