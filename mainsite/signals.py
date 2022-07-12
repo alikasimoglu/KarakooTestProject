@@ -1,6 +1,9 @@
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
+
+from accounts.models import Customer
 from mainsite.models import Company
 
 
@@ -19,3 +22,11 @@ def is_accepted(sender, instance, **kwargs):
 
         except Exception as e:
             print(e)
+
+
+@receiver(post_save, sender=Customer)
+def is_registred(sender, instance, **kwargs):
+    company = Company.objects.get(company_email=instance.profile.email)
+    if instance.profile.email == company.company_email:
+        company.is_registered = 1
+        company.save()

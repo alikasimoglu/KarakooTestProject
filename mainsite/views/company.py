@@ -38,7 +38,7 @@ class CompanyUpdateView(UpdateView):
     model = Company
     context_object_name = "company"
     template_name = 'mainsite/company_update.html'
-    fields = ('company_name', 'company_email', 'company_phone', 'additional_info', 'is_accepted', 'is_email_sent', 'is_registred')
+    fields = ('company_name', 'company_email', 'company_phone', 'additional_info', 'is_accepted', 'is_email_sent', 'is_registered')
 
     def form_valid(self, form):
         messages.success(self.request, 'Copmany information has been successfully updated!')
@@ -50,10 +50,6 @@ class CompanyDeleteView(DeleteView):
     model = Company
     template_name = 'mainsite/company_delete.html'
     success_url = reverse_lazy('mainsite:company_list')
-
-    def form_valid(self, form):
-        messages.success(self.request, 'Copmany has been successfully deleted!')
-        return super().form_valid(form)
 
 
 @method_decorator([login_required(login_url=reverse_lazy("accounts:login")), user_is_employee], name='dispatch')

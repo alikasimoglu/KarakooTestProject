@@ -28,7 +28,7 @@
                             <p><strong>Call Log:</strong> {{ company.additional_info }}</p><br>
                             <p><strong>Status:</strong> Is Accepted? {% if company.is_accepted == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
                                 | Is Email Sent? {% if company.is_email_sent == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
-                                | Is Registred? {% if company.is_registred == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}</p>
+                                | Is Registred? {% if company.is_registered == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}</p>
                             {% if user.is_authenticated and company.employee.profile_id == user.id %}
                             <a href="{% url 'mainsite:company_update' company.pk %}" class="btn btn-dark" role="button">Edit Company</a>
                                 {% if not company.is_accepted == True %}

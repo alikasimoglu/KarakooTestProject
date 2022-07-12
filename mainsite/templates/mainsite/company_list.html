@@ -21,7 +21,7 @@
                                         <p class="card-text">{{ company.company_phone }}</p>
                                         <p><strong>Status:</strong><br>Is Accepted? {% if company.is_accepted == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
                                             | Is Email Sent? {% if company.is_email_sent == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
-                                            | Is Registred? {% if company.is_registred == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}</p>
+                                            | Is Registred? {% if company.is_registered == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}</p>
                                         <a href="{{ company.get_absolute_url }}" class="btn btn-primary">View Company Details</a>
                                     </div>
                                 </div>

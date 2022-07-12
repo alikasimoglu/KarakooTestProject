@@ -14,7 +14,7 @@ class Company(models.Model):
 
     is_accepted = models.BooleanField("Is Accepted? (Yes/No)", default=False)
     is_email_sent = models.BooleanField("Is Email Sent? (Yes/No)", default=False)
-    is_registred = models.BooleanField("Is Registred? (Yes/No)", default=False)
+    is_registered = models.BooleanField("Is Registred? (Yes/No)", default=False)
 
     updated_on = models.DateTimeField("Updated on", auto_now=True)
     date_created = models.DateTimeField("Created on", auto_now_add=True)
