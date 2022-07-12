@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models import User, Employee
+from accounts.models import User, Employee, Customer
 
 
 @admin.register(User)
@@ -23,3 +23,4 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Employee)
+admin.site.register(Customer)
