@@ -8,6 +8,9 @@ class Customer(models.Model):
     profile = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Profile", primary_key=True)
     # company = models.OneToOneField(Company, on_delete=models.CASCADE, verbose_name="Company", primary_key=True)
 
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    phone = models.CharField("Phone", max_length=20, blank=True)
     representative_name = models.CharField("Representative Name", max_length=50, blank=True)
     representative_phone = models.CharField("Representative Phone", max_length=20, blank=True)
 

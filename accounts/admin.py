@@ -22,5 +22,41 @@ class UserAdmin(admin.ModelAdmin):
         return True
 
 
-admin.site.register(Employee)
-admin.site.register(Customer)
+@admin.register(Employee)
+class EmployeeAdmin(admin.ModelAdmin):
+    list_display = ["profile", "first_name", "last_name", "date_joined", "is_active"]
+    readonly_fields = ("date_joined", "updated_on")
+    fieldsets = (
+        ("USER INFORMATIONS", {
+            "fields": ("profile", "first_name", "last_name", "phone")
+        }),
+        ("STATUS AND TIME INFO", {
+            "fields": ("is_active", "date_joined", "updated_on")
+        })
+    )
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+    def has_add_permission(self, request):
+        return True
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ["profile", "first_name", "last_name", "phone", "date_joined", "is_active"]
+    readonly_fields = ("date_joined", "updated_on")
+    fieldsets = (
+        ("USER INFORMATIONS", {
+            "fields": ("profile", "first_name", "last_name", "phone", "representative_name", "representative_phone")
+        }),
+        ("STATUS AND TIME INFO", {
+            "fields": ("is_active", "date_joined", "updated_on")
+        })
+    )
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+    def has_add_permission(self, request):
+        return True
