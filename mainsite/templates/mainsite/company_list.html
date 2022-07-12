@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Company List{% endblock %}
+
+{% block content %}
+        <!--Content-->
+        <section id="content">
+            <div class="container pt-5">
+                <div class="row d-flex justify-content-center">
+                    <h1 class="text-center">Company List</h1>
+                    {% for company in companies %}
+                        {% if company.employee.profile_id == user.id %}
+                    <div class="col-4 pt-4">
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ company.company_name }}</h5>
+                                        <span class="card-text">{{ company.company_email }}</span>
+                                        <p class="card-text">{{ company.company_phone }}</p>
+                                        <p><strong>Status:</strong><br>Is Accepted? {% if company.is_accepted == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
+                                            | Is Email Sent? {% if company.is_email_sent == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
+                                            | Is Registred? {% if company.is_registred == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}</p>
+                                        <a href="{{ company.get_absolute_url }}" class="btn btn-primary">View Company Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!--End Content-->
+{% endblock %}

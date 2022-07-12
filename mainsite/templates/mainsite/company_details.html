@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Company Details{% endblock %}
+
+{% block content %}
+        <!--Content-->
+        <section id="content">
+            <div class="container pt-5">
+                <div class="row d-flex justify-content-center">
+                    {% if company.employee.profile_id == user.id %}
+                    <h1 class="text-center">{{ company.company_name }}</h1>
+                    <div class="col-6 pt-4">
+                        <div>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-success text-center" role="alert">
+                                        {% if message.tags %}
+                                            <p>{{ message }}</p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <p><strong>Assigned Employee:</strong> {{ company.employee.profile.email }}</p>
+                            <p><strong>Company Name:</strong> {{ company.company_name }}</p>
+                            <p><strong>Company Email:</strong> {{ company.company_email }}</p>
+                            <p><strong>Company Phone:</strong> {{ company.company_phone }}</p>
+                            <p><strong>Call Log:</strong> {{ company.additional_info }}</p><br>
+                            <p><strong>Status:</strong> Is Accepted? {% if company.is_accepted == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
+                                | Is Email Sent? {% if company.is_email_sent == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}
+                                | Is Registred? {% if company.is_registred == False %}&#x1F534;{% else %}&#x1F7E2;{% endif %}</p>
+                            {% if user.is_authenticated and company.employee.profile_id == user.id %}
+                            <a href="{% url 'mainsite:company_update' company.pk %}" class="btn btn-dark" role="button">Edit Company</a>
+                                {% if not company.is_accepted == True %}
+                            <a href="{% url 'mainsite:company_delete' company.pk %}" class="btn btn-danger" role="button">Delete Company</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        <!--End Content-->
+{% endblock %}
