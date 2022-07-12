@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
@@ -15,3 +16,11 @@ class EmployeeProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+    def dispatch(self, request, *args, **kwargs):
+        handler = super().dispatch(request, *args, **kwargs)
+        user = self.request.user.id
+        employee = self.get_object()
+        if employee.profile_id != user:
+            raise PermissionDenied
+        return handler

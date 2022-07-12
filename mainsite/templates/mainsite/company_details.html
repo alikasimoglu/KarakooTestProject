@@ -8,7 +8,6 @@
         <section id="content">
             <div class="container pt-5">
                 <div class="row d-flex justify-content-center">
-                    {% if company.employee.profile_id == user.id %}
                     <h1 class="text-center">{{ company.company_name }}</h1>
                     <div class="col-6 pt-4">
                         <div>
@@ -37,7 +36,6 @@
                             {% endif %}
                         </div>
                     </div>
-                    {% endif %}
                 </div>
             </div>
         </section>

@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import UpdateView
@@ -17,3 +18,11 @@ class EmployeeProfileUpdateView(UpdateView):
     def form_valid(self, form):
         messages.success(self.request, 'Employee information has been successfully updated!')
         return super().form_valid(form)
+
+    def dispatch(self, request, *args, **kwargs):
+        handler = super().dispatch(request, *args, **kwargs)
+        user = self.request.user.id
+        employee = self.get_object()
+        if employee.profile_id != user:
+            raise PermissionDenied
+        return handler
