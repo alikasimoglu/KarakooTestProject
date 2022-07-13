@@ -52,7 +52,51 @@ at <http://127.0.0.1:8000/controlme>.
 ```
 
 ## Screenshots
+Dashboard
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-1.jpg" width="100%"/>
 
+Login
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-2.jpg" width="100%"/>
+
+Password Reset: _with confirmation email_
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-4.jpg" width="100%"/>
+
+Employee Signup: _registration via unique email_
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-3.jpg" width="100%"/>
+
+Employee Profile Detail: 
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-10.jpg" width="100%"/>
+
+Employee Company List Page: _all employees can only see their own companies_
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-5.jpg" width="100%"/>
+
+Add a Company
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-9.jpg" width="100%"/>
+
+It is possible to delete the company before the company approves.
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-7.jpg" width="100%"/>
+
+Edit Company: _if checkbox "Is Accepted" will be selected, an email with registration link will be send to company.
+email sending is automated via django signals._
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-8.jpg" width="100%"/>
+
+Example Email In Consol
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-14.jpg" width="100%"/>
+
+After sending an email, "Is Email Sent" in the company status will change to green.
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-13.jpg" width="100%"/>
+
+The customer registration system will make the necessary changes through signals.
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-15.jpg" width="100%"/>
+
+All statuses turn green after the company is registered.
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-6.jpg" width="100%"/>
+
+Customer Profile Details
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-11.jpg" width="100%"/>
+
+Customer Profile Update
+<img height="100%" src="https://alikasimoglu.com/static/mmp/mmp-12.jpg" width="100%"/>
 
 ## License
 Distributed under the MIT License. See `LICENSE.txt` for more information.
