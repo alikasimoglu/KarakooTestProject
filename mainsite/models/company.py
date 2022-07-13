@@ -1,13 +1,11 @@
 from django.db import models
 from accounts.models import Employee
 from django.urls import reverse
-import uuid
 
 
 class Company(models.Model):
     is_active = models.BooleanField("Status (Active/Passive)", default=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name="Assigned Employee")
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     company_name = models.CharField("Company Name", max_length=50, unique=True)
     company_email = models.EmailField("Company Email", max_length=50, unique=True)
@@ -30,4 +28,4 @@ class Company(models.Model):
     class Meta:
         verbose_name_plural = "Companies"
         verbose_name = "Company"
-        ordering = ("date_created", )
+        ordering = ("-date_created", )

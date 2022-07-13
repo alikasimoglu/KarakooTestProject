@@ -12,7 +12,7 @@ def is_accepted(sender, instance, **kwargs):
         try:
             send_mail(
                 f'Registraion Invitation for {instance.company_email}',
-                f'Please register yourself and your company in XYZ website via the following link http://127.0.0.1:8009/accounts/signup/customer/{instance.uuid}',
+                f'Please register yourself and your company in XYZ website via the following link http://127.0.0.1:8009/accounts/signup/customer/{instance.company_email}',
                 'testcod77@gmail.com',
                 [instance.company_email],
             )

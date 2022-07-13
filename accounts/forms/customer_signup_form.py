@@ -9,8 +9,7 @@ from mainsite.models import Company
 
 
 class CustomerSignUpForm(UserCreationForm):
-    # company = forms.CharField(required=True, widget=TextInput(attrs={'readonly': 'readonly'}))
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=True, widget=TextInput(attrs={'readonly': 'readonly'}))
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
     phone = forms.CharField(required=False)
@@ -27,11 +26,7 @@ class CustomerSignUpForm(UserCreationForm):
         user.is_customer = True
         user.save()
 
-        # employee = get_object_or_404(Company)
-        # customer_company = Company.objects.get(employee__company=employee.pk)
-
         customer = Customer.objects.create(profile=user)
-        # customer_company.company_name = self.cleaned_data.get('company')
         customer.profile.email = self.cleaned_data.get('email')
         customer.first_name = self.cleaned_data.get('first_name')
         customer.last_name = self.cleaned_data.get('last_name')

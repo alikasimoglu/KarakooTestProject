@@ -1,14 +1,12 @@
 from django.db import models
 from django.urls import reverse
-
-from accounts.models import User, Employee
+from accounts.models import User
 from mainsite.models import Company
 
 
 class Customer(models.Model):
     is_active = models.BooleanField("Status (Active/Passive)", default=True)
     profile = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Profile", primary_key=True)
-    # company = models.OneToOneField(Company, on_delete=models.CASCADE, verbose_name="Company", primary_key=True)
 
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
@@ -25,7 +23,7 @@ class Customer(models.Model):
     class Meta:
         verbose_name_plural = "Customers"
         verbose_name = "Customer"
-        ordering = ("date_joined", )
+        ordering = ("-date_joined", )
 
     def get_absolute_url(self):
         return reverse("accounts:customer_profile_detail", kwargs={'pk': self.pk})

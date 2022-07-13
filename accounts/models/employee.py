@@ -23,4 +23,4 @@ class Employee(models.Model):
     class Meta:
         verbose_name_plural = "Employees"
         verbose_name = "Employee"
-        ordering = ("date_joined", )
+        ordering = ("-date_joined", )

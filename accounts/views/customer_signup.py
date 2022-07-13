@@ -21,6 +21,12 @@ class CustomerSignUpView(CreateView):
     #     initial['company'] = Company.objects.get(employee__company=company.pk)
     #     return initial
 
+    def get_initial(self):
+        email_field = self.request.path
+        initial = super(CustomerSignUpView, self).get_initial()
+        initial['email'] = email_field[26:-1]
+        return initial
+
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)

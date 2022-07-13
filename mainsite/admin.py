@@ -5,10 +5,10 @@ from mainsite.models import Company
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ["company_name", "employee", "company_email", "date_created", "is_active", "is_accepted", "is_email_sent", "is_registered"]
-    readonly_fields = ("date_created", "updated_on", "uuid")
+    readonly_fields = ("date_created", "updated_on")
     fieldsets = (
         ("USER INFORMATIONS", {
-            "fields": ("employee", "uuid", "company_name", "company_email", "company_phone", "additional_info")
+            "fields": ("employee", "company_name", "company_email", "company_phone", "additional_info")
         }),
         ("STATUS AND TIME INFO", {
             "fields": ("is_active", "is_accepted", "is_email_sent", "is_registered", "date_created", "updated_on")
