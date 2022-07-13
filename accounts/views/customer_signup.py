@@ -3,7 +3,6 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from accounts.forms import CustomerSignUpForm
 from accounts.models import User
-from mainsite.models import Company
 
 
 class CustomerSignUpView(CreateView):
@@ -15,12 +14,6 @@ class CustomerSignUpView(CreateView):
         kwargs['user_type'] = 'customer'
         return super().get_context_data(**kwargs)
 
-    # def get_initial(self):
-    #     company = get_object_or_404(Company)
-    #     initial = super(CustomerSignUpView, self).get_initial()
-    #     initial['company'] = Company.objects.get(employee__company=company.pk)
-    #     return initial
-
     def get_initial(self):
         email_field = self.request.path
         initial = super(CustomerSignUpView, self).get_initial()
@@ -31,4 +24,3 @@ class CustomerSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('mainsite:index')
-        # return super().form_valid(form)

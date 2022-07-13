@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
-{% load static %}
 
-{% block title %}Index Page{% endblock %}
+{% block title %}Dashborard{% endblock %}
 
 {% block content %}
         <!--Content-->
         <section id="content">
             <div class="container pt-5">
                 <div class="row d-flex justify-content-center">
-                    <h1 class="text-center">Index Page</h1>
-                    <div class="col-6 pt-4">
-                        <p>Index Page</p>
+                    <h1 class="text-center">Dashborard</h1>
+                    <div class="d-flex gap-3 col pt-4">
+                        <div class="col-4 bg-dark text-white text-center py-3">
+                            <strong>Total Number of Employees:</strong>
+                            <h1>{{ employees }}</h1>
+                        </div>
+                        <div class="col-4 bg-dark text-white text-center py-3">
+                            <strong>Total Number of Companies:</strong>
+                            <h1>{{ companies }}</h1>
+                        </div>
+                        <div class="col-4 bg-dark text-white text-center py-3">
+                            <strong>Total Number of Customers:</strong>
+                            <h1>{{ customers }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="col">
+                        <p>This is a back-end aimed test project with minimal front-end functions. The aim of the project is a small web-based application for XYZ service company, which would facilitate the marketing and contribute to efficient communication between staff and customers.</p>
                     </div>
                 </div>
             </div>

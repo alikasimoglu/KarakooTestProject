@@ -53,12 +53,6 @@ class CompanyUpdateView(UpdateView):
         messages.success(self.request, 'Copmany information has been successfully updated!')
         return super().form_valid(form)
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     obj = self.get_object()
-    #     if obj.employee.profile_id != self.request.user.id:
-    #         raise Http404("You are not allowed here!")
-    #     return super(CompanyUpdateView, self).dispatch(request, *args, **kwargs)
-
     def dispatch(self, request, *args, **kwargs):
         handler = super().dispatch(request, *args, **kwargs)
         user = self.request.user.id

@@ -2,10 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms import TextInput
-from django.shortcuts import get_object_or_404
-
 from accounts.models import User, Customer
-from mainsite.models import Company
 
 
 class CustomerSignUpForm(UserCreationForm):

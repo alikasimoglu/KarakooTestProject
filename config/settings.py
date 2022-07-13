@@ -54,8 +54,7 @@ INSTALLED_APPS = [
     'mainsite.apps.MainsiteConfig',
     # third party
     'crispy_forms',
-    'django_cleanup.apps.CleanupConfig',
-    'imagekit',
+    'adminsortable',
 ]
 
 # ==============================================================================
@@ -88,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',  # adminsortable
             ],
         },
     },
@@ -168,9 +168,6 @@ MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles/')  # in production mode
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# IMAGEKIT SETTINGS
-IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic'
-
 # ==============================================================================
 # THIRD-PARTY APPLICATION SETTINGS
 # ==============================================================================
@@ -180,22 +177,47 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # ==============================================================================
+# ADMIN ORDERING SETTINGS
+# ==============================================================================
+
+ADMIN_ORDERING = [
+    ("accounts", [
+        "User",
+        "Employee",
+        "Customer",
+    ]),
+    ("mainsite", [
+        "Company",
+    ]),
+    ("sites", [
+        "Site",
+    ]),
+    # ("auth", [
+    #     "Group"
+    # ])
+]
+
+# ==============================================================================
 # EMAIL SETTINGS
 # ==============================================================================
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_PORT = 587  # in production mode
-EMAIL_PORT = 465
-# EMAIL_USE_TLS = True  # in production mode
-EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False  # in production mode
-EMAIL_USE_SSL = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Should use gmail app password for stability reasons.
 EMAIL_ADMIN = env('EMAIL_ADMIN')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 465
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
+else:  # in production mode
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
 
 # ==============================================================================
 # SERVER SECURITY SETTINGS IN PRODUCTION MODE
