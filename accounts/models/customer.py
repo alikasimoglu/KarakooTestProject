@@ -1,5 +1,7 @@
 from django.db import models
-from accounts.models import User
+from django.urls import reverse
+
+from accounts.models import User, Employee
 from mainsite.models import Company
 
 
@@ -24,3 +26,10 @@ class Customer(models.Model):
         verbose_name_plural = "Customers"
         verbose_name = "Customer"
         ordering = ("date_joined", )
+
+    def get_absolute_url(self):
+        return reverse("accounts:customer_profile_detail", kwargs={'pk': self.pk})
+
+    def get_customer_representative(self):
+        employee = Company.objects.get(company_email=self.profile.email)
+        return employee.employee

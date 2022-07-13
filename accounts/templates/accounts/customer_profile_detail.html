@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Profile Details{% endblock %}
+
+{% block content %}
+        <!--Content-->
+        <section id="content">
+            <div class="container pt-5">
+                <div class="row d-flex justify-content-center">
+                    <h1 class="text-center">Customer Profile Details</h1>
+                    <div class="col-6 pt-4">
+                        <div>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-success text-center" role="alert">
+                                        {% if message.tags %}
+                                            <p>{{ message }}</p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <p><strong>Customer Representative:</strong> {{ customer.get_customer_representative }}</p>
+                            <p><strong>Customer Representative Phone:</strong> {{ customer.get_customer_representative.phone }}</p>
+                            <p><strong>Email:</strong> {{ customer.profile.email }}</p>
+                            <p><strong>First Name:</strong> {{ customer.first_name }}</p>
+                            <p><strong>Last Name:</strong> {{ customer.last_name }}</p>
+                            <p><strong>Phone:</strong> {{ customer.phone }}</p>
+                            <p><strong>Representative Name:</strong> {{ customer.representative_name }}</p>
+                            <p><strong>Representative Phone:</strong> {{ customer.representative_phone }}</p>
+                            {% if user.is_authenticated and customer.profile_id == user.id %}
+                            <a href="{% url 'accounts:customer_profile_update' customer.pk %}" class="btn btn-dark" role="button">Update Profile</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Content-->
+{% endblock %}

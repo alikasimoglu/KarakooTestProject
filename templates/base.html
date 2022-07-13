@@ -34,7 +34,11 @@
                             <li class="nav-item"><a class="nav-link" data-scroll href="{% url 'mainsite:company_list' %}" target="_top">Company List</a></li>
                             <li class="nav-item"><a class="nav-link" data-scroll href="{% url 'mainsite:create_company' %}" target="_top">Create a Company</a></li>
                             <li class="nav-item"><a class="nav-link" data-scroll href="{% url 'accounts:employee_profile_detail' request.user.pk %}" target="_top">Edit Profile</a></li>
-                            {% endif %}{% if user.is_authenticated %}
+                            {% endif %}
+                            {% if user.is_authenticated and user.is_customer %}
+                            <li class="nav-item"><a class="nav-link" data-scroll href="{% url 'accounts:customer_profile_detail' request.user.pk %}" target="_top">Edit Profile</a></li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" data-scroll href="{% url 'accounts:logout' %}" target="_top">({{ user.get_username }}) Logout</a></li>
                             {% endif %}
                         </ul>

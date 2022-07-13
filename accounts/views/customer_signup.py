@@ -1,8 +1,8 @@
 from django.contrib.auth import login
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.views.generic import CreateView
 from accounts.forms import CustomerSignUpForm
-from accounts.models import User, Employee
+from accounts.models import User
 from mainsite.models import Company
 
 
@@ -25,3 +25,4 @@ class CustomerSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('mainsite:index')
+        # return super().form_valid(form)
