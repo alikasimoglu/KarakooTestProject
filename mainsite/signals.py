@@ -29,5 +29,8 @@ def is_registred(sender, instance, **kwargs):
         if instance.profile.email == company.company_email:
             company.is_registered = 1
             company.save()
+        if instance.phone:
+            company.company_phone = instance.phone
+            company.save()
     except Exception as e:
-        raise ValidationError("Please enter the correct email address.")
+        raise ValidationError("Something went wrong.")
